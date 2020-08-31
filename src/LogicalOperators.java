@@ -47,7 +47,6 @@ public class LogicalOperators {
                 System.out.println("You are in your free time.");
             }
 
-
         }
 
     }
