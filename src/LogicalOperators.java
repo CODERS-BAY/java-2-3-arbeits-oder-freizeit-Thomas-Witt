@@ -2,41 +2,53 @@ import java.util.Scanner;
 
 public class LogicalOperators {
     public static void main(String[] args) {
-        int hour;
-        int minutes;
+        System.out.println("You are about to check, if the time falls within your work-hours. But first, du you want to use military-time (like 1430 hours), than press '1'. \n" +
+                "Do you want to use standard European time (like 14:30), than press '2'.\n" +
+                "If you want to use silly american time (like 2:30 pm), than press '3':");
+        int timeFormat;
+        Scanner scanner = new Scanner(System.in);
+        timeFormat = scanner.nextInt();
 
-        System.out.println("Wie spät ist es? Bitte gib erst die Stunden und dann die Minuten an:");
-        do {
-            Scanner scanner = new Scanner(System.in);
-            hour = scanner.nextInt();
-            if (hour < 0) {
-                System.out.println("Wenn du negative Zeit entdeckt hast, gehe nach Stockholm und hole dir" +
-                        "deinen Nobelpreis ab. Bei der Überprüfung ob Arbeitszeit ist, ist sie aber unangebracht!");
-            } else if (hour > 23) {
-                System.out.println("Hier, auf der Erde, ist der Tag nach 23 Stunden und 59 Minuten vorbei. Bitte " +
-                        "gewöhne dich daran.");
+        if (timeFormat == 1) {
+            System.out.println("Thank you. Now please input the time you want to check:");
+            int time = scanner.nextInt();
+            if (time >= 800 && time < 1200 || time >= 1300 && time < 1600) {
+                System.out.println("You are in the work time.");
+            } else if (time >= 1200 && time < 1300) {
+                System.out.println("You are in your lunch break.");
+            } else {
+                System.out.println("You are in your free time.");
             }
-        }
-        while (hour<0 || hour >23);
-        System.out.println("Und jetzt die Minuten:");
-        do {
-            Scanner scanner2 = new Scanner(System.in);
-            minutes = scanner2.nextInt();
-            if (minutes < 0) {
-                System.out.println("Du sollst hier die Minuten angeben, nicht deinen Intelligenzquotienten!");
-            } else if (minutes > 59) {
-                System.out.println("Wenn deine Uhr " + minutes + " Minuten anzeigt, würde ich sie zurückgeben...");
+        } else if (timeFormat == 2) {
+            System.out.println("Thank you. Now please put in the hour:");
+            int hour = scanner.nextInt();
+            System.out.println("Alright. Now please the minutes:");
+            int minutes = scanner.nextInt();                                    //minutes are not needed to calculate the work hours, but the user feels better if he can type minutes too, so i give him the option
+            if (hour >= 8 && hour < 12 || hour >= 13 && hour < 16) {
+                System.out.println("You are in the work time.");
+            } else if (hour == 12) {
+                System.out.println("You are in your lunch break.");
+            } else {
+                System.out.println("You are in your free time.");
             }
 
-        }while (minutes<0 || minutes>59);
-            if(hour>=8 && hour<12 || hour >=13 && hour<16){
-            System.out.println("Du befindest dich in der Arbeitszeit");
+        } else if (timeFormat == 3) {
+            System.out.println("Thank you. Now please put in the hour:");
+            int hour = scanner.nextInt();
+            System.out.println("Is that am or pm");
+            String amOrPm = scanner.next();
+            System.out.println("Alright. Now please the minutes:");
+            int minutes = scanner.nextInt();
+            if (hour >= 8 && hour < 12 && amOrPm.equals("am") || hour >= 1 && hour < 4 && amOrPm.equals("pm")) {
+                System.out.println("You are in the work time.");
+            } else if (hour == 12 && amOrPm.equals("am")) {
+                System.out.println("You are in your lunch break.");
+            } else {
+                System.out.println("You are in your free time.");
+            }
+
+
         }
-        else if (hour == 12){
-            System.out.println("Du hast Mittagspause!");
-        }
-        else{
-            System.out.println("FREIZEIT!!! JUHUUUU!!!");
-        }
+
     }
 }
